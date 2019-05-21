@@ -14,16 +14,16 @@ def show_img(img):
 	cv2.destroyAllWindows()
 
 
-def create_tri(img, output_width, output_height, layer = 4, thickness = 2):
+def create_tri(img, output_width, output_height, layer = 1.2, thickness = 0.8):
 	height = img.shape[0]
 	width = img.shape[1]
 	
+	geometry = GEO()
+
 	v1 = []
 	v2 = []
-
-	geometry = GEO()
 	# top
-	for i in range(height):
+	for i in range(height-1):
 		v1 = []
 		v2 = []
 		for j in range(width):
@@ -32,7 +32,7 @@ def create_tri(img, output_width, output_height, layer = 4, thickness = 2):
 				(255 - img[i, j]) * layer / 255 + thickness))
 			v2.append((j * output_width / width, 
 				(i+1) * output_height / height, 
-				(255 - img[i, j]) * layer / 255 + thickness))
+				(255 - img[i+1, j]) * layer / 255 + thickness))
 		geometry.quad(v1, v2)
 	
 	# side width
@@ -92,11 +92,6 @@ def create_tri(img, output_width, output_height, layer = 4, thickness = 2):
 
 	return geometry
 
-def save_xyz(points, filename = 'litophane.xyz'):
-	with open(filename, 'w') as fd:
-		for p in points:
-			fd.write(' '.join([str(p[0]), str(p[1]), str(p[2])]) + '\n')
-
 def resize_img(img, width, height):
 	return cv2.resize(img, (width, height), interpolation=cv2.INTER_AREA)
 
@@ -121,5 +116,5 @@ if __name__ == '__main__':
 
 	geometry = create_tri(img, scale_width, scale_height)
 	print (geometry)
-	
-	geometry.save_stl('litophane.stl')
+
+	geometry.save_stl('.'.join(filename.split('.')[:-1]) + '.stl')

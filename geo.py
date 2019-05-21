@@ -41,16 +41,16 @@ class GEO:
 				i2 = self._add_points(v1[i])
 				i3 = self._add_points(v2[i])
 
-				self.edges.add(sorted_tuple(i0,i1))
-				self.edges.add(sorted_tuple(i0,i2))
-				self.edges.add(sorted_tuple(i0,i3))
-				self.edges.add(sorted_tuple(i1,i2))
-				self.edges.add(sorted_tuple(i1,i3))
-				self.edges.add(sorted_tuple(i2,i3))
+				# self.edges.add(sorted_tuple(i0, i1))
+				# self.edges.add(sorted_tuple(i0, i2))
+				# self.edges.add(sorted_tuple(i0, i3))
+				# self.edges.add(sorted_tuple(i1, i2))
+				# self.edges.add(sorted_tuple(i1, i3))
+				# self.edges.add(sorted_tuple(i2, i3))
 
 				self.faces.add(sorted_tuple_3(i0, i1, i2))
-				self.faces.add(sorted_tuple_3(i0, i1, i3))
-				self.faces.add(sorted_tuple_3(i0, i2, i3))
+				# self.faces.add(sorted_tuple_3(i0, i1, i3))
+				# self.faces.add(sorted_tuple_3(i0, i2, i3))
 				self.faces.add(sorted_tuple_3(i1, i2, i3))
 
 	def save_stl(self, filename = 'geo.stl'):
